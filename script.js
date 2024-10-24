@@ -9,7 +9,7 @@ usuarios.forEach(usuario => {
     const botonDisminuir = usuario.querySelector('.disminuir');
     const botonGuardar = usuario.querySelector('.guardar');
     
-    const usuarioId = usuario.id; // Usaremos el ID de usuario para identificarlo en la base de datos
+    const usuarioId = usuario.id; // Usamos el ID de usuario para identificarlo en la base de datos
     let valorActual = 0;
 
     // Al cargar la página, obtenemos el valor guardado en el backend
@@ -18,6 +18,9 @@ usuarios.forEach(usuario => {
         .then(data => {
             valorActual = data.valor;
             numero.textContent = valorActual;
+        })
+        .catch(error => {
+            console.error('Error al obtener el valor:', error);
         });
 
     // Función para aumentar el valor

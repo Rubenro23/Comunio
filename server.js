@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Conectar a la base de datos MongoDB
+// Conexión a MongoDB (si estás usando MongoDB Atlas, cambia la URI)
 mongoose.connect('mongodb://localhost:27017/contadores', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB'))
   .catch(err => console.error('Error al conectar a MongoDB', err));
@@ -28,7 +28,8 @@ app.get('/contador/:usuarioId', async (req, res) => {
         if (contador) {
             res.json(contador);
         } else {
-            res.json({ usuarioId: req.params.usuarioId, valor: 0 }); // Si no existe, devolver 0 por defecto
+            // Si no hay contador en la base de datos, devolvemos 0
+            res.json({ usuarioId: req.params.usuarioId, valor: 0 });
         }
     } catch (err) {
         res.status(500).send('Error al obtener el contador');
